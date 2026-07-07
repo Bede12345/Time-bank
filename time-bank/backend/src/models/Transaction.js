@@ -61,4 +61,36 @@ class Transaction {
         return result.rows[0];
     }
 
+    static async confirmCompletion(id, userId) {
+        // Check if user is part of the transaction
+        const transaction = await this.findById(id);
+        if (!transaction) return null;
+
+        let field;
+        if (transaction.requester_id === userId) {
+            field = 'requester_confirmed';
+        } else if (transaction.provider_id === userId) {
+            field = 'provider_confirmed';
+        } else {
+            return null;
+        }
+
+        const result = await query(
+            `UPDATE transactions 
+             SET ${field} = true, updated_at = CURRENT_TIMESTAMP
+             WHERE id = $1
+             RETURNING *`,
+            [id]
+        );
+
+        const updated = result.rows[0];
+        
+        // Check if both confirmed, complete the transaction
+        if (updated.requester_confirmed && updated.provider_confirmed) {
+            await this.completeTransaction(id);
+        }
+
+        return updated;
+    }
+
     

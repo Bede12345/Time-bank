@@ -77,7 +77,7 @@ const Home = () => {
               <div key={offer.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-xl font-semibold text-gray-800">{offer.title}</h3>
-                  <span className={\px-2 py-1 rounded text-xs font-semibold \\}>
+                  <span className={'px-2 py-1 rounded text-xs font-semibold ' + (offer.type === 'offer' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800')}>
                     {offer.type === 'offer' ? 'Offer' : 'Request'}
                   </span>
                 </div>
@@ -87,12 +87,12 @@ const Home = () => {
                   <span>{offer.credits_per_hour} credits/hour</span>
                 </div>
                 <div className="mt-4 flex justify-between items-center">
-                  <span className={\	ext-xs px-2 py-1 rounded \\}>
+                  <span className={'text-xs px-2 py-1 rounded ' + (offer.status === 'open' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800')}>
                     {offer.status}
                   </span>
                   {isAuthenticated && offer.user_id !== user?.id && offer.status === 'open' && (
                     <Link
-                      to={\/offer/\\}
+                      to={/offer/}
                       className="text-blue-600 hover:text-blue-800 font-medium"
                     >
                       View Details →

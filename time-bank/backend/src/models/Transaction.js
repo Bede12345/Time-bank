@@ -119,4 +119,17 @@ class Transaction {
         return transaction;
     }
 
-    
+    static async getStats() {
+        const result = await query(
+            `SELECT 
+                COUNT(*) as total_transactions,
+                COUNT(CASE WHEN status = 'completed' THEN 1 END) as completed,
+                COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending,
+                SUM(credits_held) as total_credits_held
+             FROM transactions`
+        );
+        return result.rows[0];
+    }
+}
+
+module.exports = Transaction;

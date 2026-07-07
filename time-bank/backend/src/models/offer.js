@@ -29,4 +29,44 @@ class Offer {
         return result.rows[0];
     }
 
+    static async findAll(filters = {}) {
+        let queryText = `
+            SELECT o.*, u.username, u.full_name, u.rating_average
+            FROM offers o
+            JOIN users u ON o.user_id = u.id
+            WHERE o.status = 'open'
+        `;
+        const params = [];
+        let paramCount = 1;
+
+        if (filters.category) {
+            queryText += ` AND o.category = $${paramCount}`;
+            params.push(filters.category);
+            paramCount++;
+        }
+
+        if (filters.type) {
+            queryText += ` AND o.type = $${paramCount}`;
+            params.push(filters.type);
+            paramCount++;
+        }
+
+        if (filters.user_id) {
+            queryText += ` AND o.user_id = $${paramCount}`;
+            params.push(filters.user_id);
+            paramCount++;
+        }
+
+        queryText += ` ORDER BY o.created_at DESC`;
+        
+        if (filters.limit) {
+            queryText += ` LIMIT $${paramCount}`;
+            params.push(filters.limit);
+            paramCount++;
+        }
+
+        const result = await query(queryText, params);
+        return result.rows;
+    }
+
     

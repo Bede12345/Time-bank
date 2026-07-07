@@ -41,3 +41,14 @@ const authenticate = async (req, res, next) => {
     }
 };
 
+const authorize = (roles = []) => {
+    return (req, res, next) => {
+        if (!req.user) {
+            return res.status(401).json({ error: 'Authentication required' });
+        }
+        // For now, just check if user exists (we can add role-based later)
+        next();
+    };
+};
+
+module.exports = { authenticate, authorize };

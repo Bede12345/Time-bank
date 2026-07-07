@@ -75,4 +75,15 @@ class Rating {
         return result.rows;
     }
 
+    static async getAverage(userId) {
+        const result = await query(
+            `SELECT COALESCE(AVG(rating), 0) as average, 
+                    COUNT(*) as total
+             FROM ratings
+             WHERE rated_user_id = $1`,
+            [userId]
+        );
+        return result.rows[0];
+    }
+
     

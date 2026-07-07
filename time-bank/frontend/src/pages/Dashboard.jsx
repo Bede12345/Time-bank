@@ -70,7 +70,12 @@ const Dashboard = () => {
                     <h3 className="font-semibold">{offer.title}</h3>
                     <p className="text-sm text-gray-500">{offer.category} • {offer.credits_per_hour} credits/hour</p>
                   </div>
-                  <span className={\px-2 py-1 rounded text-sm \\}>
+                  <span className={'px-2 py-1 rounded text-sm ' + (
+                    offer.status === 'open' ? 'bg-green-100 text-green-800' :
+                    offer.status === 'matched' ? 'bg-yellow-100 text-yellow-800' :
+                    offer.status === 'completed' ? 'bg-blue-100 text-blue-800' :
+                    'bg-gray-100 text-gray-800'
+                  )}>
                     {offer.status}
                   </span>
                 </div>
@@ -95,7 +100,13 @@ const Dashboard = () => {
                       </p>
                       <p className="text-sm text-gray-500">{tx.hours_estimated} hours • {tx.credits_held} credits</p>
                     </div>
-                    <span className={\px-2 py-1 rounded text-sm \\}>
+                    <span className={'px-2 py-1 rounded text-sm ' + (
+                      tx.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                      tx.status === 'accepted' ? 'bg-blue-100 text-blue-800' :
+                      tx.status === 'in_progress' ? 'bg-purple-100 text-purple-800' :
+                      tx.status === 'completed' ? 'bg-green-100 text-green-800' :
+                      'bg-red-100 text-red-800'
+                    )}>
                       {tx.status}
                     </span>
                   </div>

@@ -14,4 +14,17 @@ exports.createTransaction = async (req, res) => {
         const { offer_id, hours_estimated } = req.body;
         const requesterId = req.userId;
 
+        const offer = await Offer.findById(offer_id);
+        if (!offer) {
+            return res.status(404).json({ error: 'Offer not found' });
+        }
+
+        if (offer.user_id === requesterId) {
+            return res.status(400).json({ error: 'Cannot request your own offer' });
+        }
+
+        if (offer.status !== 'open') {
+            return res.status(400).json({ error: 'Offer is no longer available' });
+        }
+
         

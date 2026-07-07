@@ -141,4 +141,8 @@ exports.updateTransactionStatus = async (req, res) => {
             return res.status(404).json({ error: 'Transaction not found' });
         }
 
+        if (transaction.requester_id !== req.userId && transaction.provider_id !== req.userId) {
+            return res.status(403).json({ error: 'Not authorized' });
+        }
+
         

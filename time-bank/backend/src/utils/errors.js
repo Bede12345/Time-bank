@@ -55,4 +55,20 @@ const errorHandler = (err, req, res, next) => {
         userId: req.userId
     });
 
+    if (err.code === '23505') {
+        return res.status(409).json({
+            success: false,
+            error: 'Duplicate entry',
+            message: err.detail
+        });
+    }
+
+    if (err.code === '23503') {
+        return res.status(400).json({
+            success: false,
+            error: 'Invalid reference',
+            message: 'Referenced record does not exist'
+        });
+    }
+
     

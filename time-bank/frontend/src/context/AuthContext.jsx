@@ -41,15 +41,12 @@ export const AuthProvider = ({ children }) => {
       const { token, user } = response.data;
       console.log('✅ Login successful');
       
-      // Store in localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       
-      // Set state
       setUser(user);
       
-      // Set default auth header for future requests
-      api.defaults.headers.common['Authorization'] = Bearer ;
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
       return { success: true };
     } catch (error) {
@@ -68,15 +65,13 @@ export const AuthProvider = ({ children }) => {
       const { token, user } = response.data;
       console.log('✅ Registration successful');
       
-      // Store in localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       
-      // Set state
       setUser(user);
       
-      // Set default auth header
-      api.defaults.headers.common['Authorization'] = Bearer ;
+      
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
       return { success: true };
     } catch (error) {

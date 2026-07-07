@@ -95,3 +95,4 @@
 {"level":"info","message":{"duration":"1ms","ip":"::1","method":"GET","status":304,"url":"/","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 16:08:29"}
 {"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 16:08:54"}
 {"level":"info","message":{"duration":"129ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 16:08:54"}
+{"level":"info","message":{"duration":"140ms","ip":"::1","method":"POST","status":401,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.2506"},"timestamp":"2026-07-07 16:14:13"}

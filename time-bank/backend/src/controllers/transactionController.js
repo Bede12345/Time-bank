@@ -46,4 +46,19 @@ exports.createTransaction = async (req, res) => {
             hours_estimated
         });
 
+        await User.updateCredits(requesterId, -credits_held);
+
+        await Offer.updateStatus(offer_id, 'matched');
+
+        logger.info(`Transaction created: ${transaction.id} for offer ${offer_id}`);
         
+        res.status(201).json({
+            success: true,
+            transaction
+        });
+    } catch (error) {
+        logger.error('Create transaction error:', error);
+        res.status(500).json({ error: 'Failed to create transaction' });
+    }
+};
+

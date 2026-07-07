@@ -69,4 +69,15 @@ class Offer {
         return result.rows;
     }
 
+    static async updateStatus(id, status) {
+        const result = await query(
+            `UPDATE offers 
+             SET status = $1, updated_at = CURRENT_TIMESTAMP
+             WHERE id = $2
+             RETURNING *`,
+            [status, id]
+        );
+        return result.rows[0];
+    }
+
     

@@ -49,3 +49,20 @@ exports.getOffers = async (req, res) => {
     }
 };
 
+exports.getOffer = async (req, res) => {
+    try {
+        const offer = await Offer.findById(req.params.id);
+        if (!offer) {
+            return res.status(404).json({ error: 'Offer not found' });
+        }
+
+        res.json({
+            success: true,
+            offer
+        });
+    } catch (error) {
+        logger.error('Get offer error:', error);
+        res.status(500).json({ error: 'Failed to fetch offer' });
+    }
+};
+

@@ -38,4 +38,12 @@ exports.createTransaction = async (req, res) => {
             });
         }
 
+        const transaction = await Transaction.create({
+            offer_id,
+            requester_id: requesterId,
+            provider_id: offer.user_id,
+            credits_held,
+            hours_estimated
+        });
+
         

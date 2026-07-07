@@ -159,4 +159,23 @@ exports.updateTransactionStatus = async (req, res) => {
 
         const updated = await Transaction.updateStatus(transactionId, status);
 
+        if (status === 'cancelled') {
+            await User.updateCredits(transaction.requester_id, transaction.credits_held);
+            await Offer.updateStatus(transaction.offer_id, 'open');
+        }
+
+        if (status === 'in_progress') {
+            // Could add logic here for starting the trade
+        }
+
+        logger.info(`Transaction ${transactionId} status updated to ${status}`);
         
+        res.json({
+            success: true,
+            transaction: updated
+        });
+    } catch (error) {
+        logger.error('Update transaction error:', error);
+        res.status(500).json({ error: 'Failed to update transaction' });
+    }
+};

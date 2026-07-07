@@ -58,4 +58,26 @@ const validators = {
             .notEmpty()
             .withMessage('Category is required')
             .isIn(['Technology', 'Education', 'Home Services', 'Creative', 'Health', 'Business', 'Other'])
-            
+            .withMessage('Invalid category'),
+        body('type')
+            .isIn(['offer', 'request'])
+            .withMessage('Type must be offer or request'),
+        body('credits_per_hour')
+            .isInt({ min: 1, max: 100 })
+            .withMessage('Credits per hour must be between 1 and 100'),
+        body('location')
+            .optional()
+            .isLength({ max: 100 })
+            .withMessage('Location cannot exceed 100 characters'),
+        body('is_remote')
+            .optional()
+            .isBoolean()
+            .withMessage('is_remote must be a boolean'),
+        body('expires_at')
+            .optional()
+            .isISO8601()
+            .withMessage('Invalid date format')
+            .toDate()
+    ],
+
+    

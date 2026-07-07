@@ -46,4 +46,20 @@ class Rating {
         return result.rows[0];
     }
 
+    static async findByUser(userId) {
+        const result = await query(
+            `SELECT r.*, 
+                    t.offer_id, o.title as offer_title,
+                    u.username as rater_username, u.full_name as rater_name
+             FROM ratings r
+             JOIN transactions t ON r.transaction_id = t.id
+             JOIN offers o ON t.offer_id = o.id
+             JOIN users u ON r.rater_id = u.id
+             WHERE r.rated_user_id = $1
+             ORDER BY r.created_at DESC`,
+            [userId]
+        );
+        return result.rows;
+    }
+
     

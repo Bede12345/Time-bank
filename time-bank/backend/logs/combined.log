@@ -9,3 +9,10 @@
 {"level":"info","message":{"duration":"93ms","ip":"::1","method":"POST","status":500,"url":"/register","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.2506"},"timestamp":"2026-07-07 12:06:59"}
 {"level":"error","message":"Registration error: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string","stack":"Error: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string\n    at C:\\Users\\Administrator\\Desktop\\time-bank\\Time-bank\\time-bank\\backend\\node_modules\\pg-pool\\index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async User.findByEmail (C:\\Users\\Administrator\\Desktop\\time-bank\\Time-bank\\time-bank\\backend\\src\\models\\User.js:20:24)\n    at async exports.register (C:\\Users\\Administrator\\Desktop\\time-bank\\Time-bank\\time-bank\\backend\\src\\controllers\\authController.js:24:30)","timestamp":"2026-07-07 12:13:55"}
 {"level":"info","message":{"duration":"42ms","ip":"::1","method":"POST","status":500,"url":"/register","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.2506"},"timestamp":"2026-07-07 12:13:55"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-07-07 12:18:10"}
+{"level":"info","message":"Environment: development","timestamp":"2026-07-07 12:18:10"}
+{"level":"info","message":"Health check: http://localhost:5000/health","timestamp":"2026-07-07 12:18:10"}
+{"level":"info","message":"User registered: john_doe (john@example.com)","timestamp":"2026-07-07 12:18:34"}
+{"level":"info","message":{"duration":"251ms","ip":"::1","method":"POST","status":201,"url":"/register","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.2506"},"timestamp":"2026-07-07 12:18:34"}
+{"level":"info","message":"User logged in: john_doe (john@example.com)","timestamp":"2026-07-07 12:20:27"}
+{"level":"info","message":{"duration":"323ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.2506"},"timestamp":"2026-07-07 12:20:27"}

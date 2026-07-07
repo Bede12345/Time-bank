@@ -55,4 +55,9 @@ exports.register = async (req, res) => {
                 time_credits: user.time_credits
             }
         });
-        
+        } catch (error) {
+        logger.error('Registration error:', error);
+        res.status(500).json({ error: 'Registration failed' });
+    }
+};
+

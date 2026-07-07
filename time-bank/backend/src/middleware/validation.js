@@ -80,4 +80,13 @@ const validators = {
             .toDate()
     ],
 
+    createTransaction: [
+        body('offer_id')
+            .isInt()
+            .withMessage('Valid offer ID is required'),
+        body('hours_estimated')
+            .isInt({ min: 1, max: 40 })
+            .withMessage('Estimated hours must be between 1 and 40')
+    ],
+
     

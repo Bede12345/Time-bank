@@ -95,3 +95,16 @@ exports.getUserTransactions = async (req, res) => {
     }
 };
 
+exports.getTopUsers = async (req, res) => {
+    try {
+        const limit = req.query.limit || 10;
+        const result = await query(
+            `SELECT id, username, full_name, rating_average, rating_count, time_credits
+             FROM users
+             WHERE is_active = true
+             ORDER BY rating_average DESC, rating_count DESC
+             LIMIT $1`,
+            [limit]
+        );
+
+        

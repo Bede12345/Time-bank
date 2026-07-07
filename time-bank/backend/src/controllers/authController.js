@@ -21,4 +21,14 @@ exports.register = async (req, res) => {
 
         const { username, email, password, full_name, bio, skills } = req.body;
 
+        const existingUser = await User.findByEmail(email);
+        if (existingUser) {
+            return res.status(400).json({ error: 'Email already registered' });
+        }
+
+        const existingUsername = await User.findByUsername(username);
+        if (existingUsername) {
+            return res.status(400).json({ error: 'Username already taken' });
+        }
+
         

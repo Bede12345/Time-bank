@@ -43,3 +43,16 @@ class ConflictError extends AppError {
     }
 }
 
+const errorHandler = (err, req, res, next) => {
+    const { logger } = require('./logger');
+
+    logger.error({
+        type: 'error_handler',
+        message: err.message,
+        stack: err.stack,
+        path: req.path,
+        method: req.method,
+        userId: req.userId
+    });
+
+    

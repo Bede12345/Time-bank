@@ -99,4 +99,10 @@ const validators = {
             .withMessage('Comment cannot exceed 500 characters')
     ],
 
-    
+    idParam: [
+        param('id')
+            .isInt()
+            .withMessage('Invalid ID format')
+    ]
+};
+

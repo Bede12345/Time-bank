@@ -18,4 +18,15 @@ class Offer {
         return result.rows[0];
     }
 
+    static async findById(id) {
+        const result = await query(
+            `SELECT o.*, u.username, u.full_name, u.rating_average
+             FROM offers o
+             JOIN users u ON o.user_id = u.id
+             WHERE o.id = $1`,
+            [id]
+        );
+        return result.rows[0];
+    }
+
     

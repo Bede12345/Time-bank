@@ -20,4 +20,30 @@ class Rating {
             [transaction_id, rater_id, rated_user_id, rating, comment]
         );
 
-        
+        await this.updateUserRating(rated_user_id);
+
+        return result.rows[0];
+    }
+
+    static async updateUserRating(userId) {
+        const result = await query(
+            `UPDATE users 
+             SET rating_average = (
+                 SELECT COALESCE(AVG(rating), 0)
+                 FROM ratings
+                 WHERE rated_user_id = $1
+             ),
+             rating_count = (
+                 SELECT COUNT(*)
+                 FROM ratings
+                 WHERE rated_user_id = $1
+             ),
+             updated_at = CURRENT_TIMESTAMP
+             WHERE id = $1
+             RETURNING rating_average, rating_count`,
+            [userId]
+        );
+        return result.rows[0];
+    }
+
+    

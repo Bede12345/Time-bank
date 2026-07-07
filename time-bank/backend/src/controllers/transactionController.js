@@ -27,4 +27,15 @@ exports.createTransaction = async (req, res) => {
             return res.status(400).json({ error: 'Offer is no longer available' });
         }
 
+        const credits_held = offer.credits_per_hour * hours_estimated;
+
+        const requester = await User.findById(requesterId);
+        if (requester.time_credits < credits_held) {
+            return res.status(400).json({ 
+                error: 'Insufficient time credits',
+                required: credits_held,
+                available: requester.time_credits
+            });
+        }
+
         

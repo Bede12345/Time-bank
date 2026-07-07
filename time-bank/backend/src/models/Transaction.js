@@ -33,4 +33,21 @@ class Transaction {
         return result.rows[0];
     }
 
+    static async findByUser(userId) {
+        const result = await query(
+            `SELECT t.*, 
+                    o.title as offer_title, o.type as offer_type,
+                    r.username as requester_username,
+                    p.username as provider_username
+             FROM transactions t
+             JOIN offers o ON t.offer_id = o.id
+             JOIN users r ON t.requester_id = r.id
+             JOIN users p ON t.provider_id = p.id
+             WHERE t.requester_id = $1 OR t.provider_id = $1
+             ORDER BY t.created_at DESC`,
+            [userId]
+        );
+        return result.rows;
+    }
+
     

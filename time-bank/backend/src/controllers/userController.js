@@ -79,3 +79,19 @@ exports.getUserOffers = async (req, res) => {
     }
 };
 
+exports.getUserTransactions = async (req, res) => {
+    try {
+        const userId = req.params.id || req.userId;
+        const transactions = await Transaction.findByUser(userId);
+        
+        res.json({
+            success: true,
+            count: transactions.length,
+            transactions
+        });
+    } catch (error) {
+        logger.error('Get user transactions error:', error);
+        res.status(500).json({ error: 'Failed to fetch user transactions' });
+    }
+};
+

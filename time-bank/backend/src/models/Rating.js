@@ -86,4 +86,21 @@ class Rating {
         return result.rows[0];
     }
 
-    
+    static async delete(ratingId, userId) {
+
+        const result = await query(
+            'DELETE FROM ratings WHERE id = $1 AND rater_id = $2 RETURNING *',
+            [ratingId, userId]
+        );
+        
+        if (result.rows.length > 0) {
+
+            const rating = result.rows[0];
+            await this.updateUserRating(rating.rated_user_id);
+        }
+        
+        return result.rows[0];
+    }
+}
+
+module.exports = Rating;

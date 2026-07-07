@@ -102,3 +102,21 @@ exports.login = async (req, res) => {
     }
 };
 
+exports.getMe = async (req, res) => {
+    try {
+        const user = await User.findById(req.userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const stats = await User.getStats(req.userId);
+
+        res.json({
+            ...user,
+            stats
+        });
+    } catch (error) {
+        logger.error('Get user error:', error);
+        res.status(500).json({ error: 'Failed to fetch user data' });
+    }
+};

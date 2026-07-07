@@ -136,4 +136,19 @@ const sanitize = {
         }
         next();
     },
-    
+    offer: (req, res, next) => {
+        if (req.body.title) {
+            req.body.title = req.body.title.trim();
+        }
+        if (req.body.description) {
+            req.body.description = req.body.description.trim();
+        }
+        next();
+    }
+};
+
+module.exports = {
+    validators,
+    validate,
+    sanitize
+};

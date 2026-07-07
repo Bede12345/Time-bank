@@ -80,4 +80,25 @@ exports.login = async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        
+        const token = generateToken(user.id);
+
+        logger.info(`User logged in: ${user.username} (${user.email})`);
+
+        res.json({
+            success: true,
+            token,
+            user: {
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                full_name: user.full_name,
+                time_credits: user.time_credits,
+                rating_average: user.rating_average
+            }
+        });
+    } catch (error) {
+        logger.error('Login error:', error);
+        res.status(500).json({ error: 'Login failed' });
+    }
+};
+

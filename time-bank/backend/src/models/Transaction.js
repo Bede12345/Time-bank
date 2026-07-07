@@ -17,4 +17,20 @@ class Transaction {
         return result.rows[0];
     }
 
+    static async findById(id) {
+        const result = await query(
+            `SELECT t.*, 
+                    o.title as offer_title, o.type as offer_type,
+                    r.username as requester_username, r.full_name as requester_name,
+                    p.username as provider_username, p.full_name as provider_name
+             FROM transactions t
+             JOIN offers o ON t.offer_id = o.id
+             JOIN users r ON t.requester_id = r.id
+             JOIN users p ON t.provider_id = p.id
+             WHERE t.id = $1`,
+            [id]
+        );
+        return result.rows[0];
+    }
+
     

@@ -93,4 +93,30 @@ class Transaction {
         return updated;
     }
 
+    static async completeTransaction(id) {
+        // Release credits and update status
+        const result = await query(
+            `UPDATE transactions 
+             SET status = 'completed', 
+                 completion_date = CURRENT_TIMESTAMP,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = $1
+             RETURNING *`,
+            [id]
+        );
+
+        const transaction = result.rows[0];
+        
+        // Transfer credits to provider
+        await query(
+            `UPDATE users 
+             SET time_credits = time_credits + $1,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = $2`,
+            [transaction.credits_held, transaction.provider_id]
+        );
+
+        return transaction;
+    }
+
     

@@ -2,7 +2,6 @@
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const { user } = useAuth();

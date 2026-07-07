@@ -26,4 +26,19 @@ const requestLogger = (req, res, next) => {
             userId: req.userId
         });
 
-        
+        if (res.statusCode >= 400) {
+            logger.error({
+                type: 'error_response',
+                method: req.method,
+                url: req.url,
+                status: res.statusCode,
+                data: data
+            });
+        }
+
+        oldJson.call(this, data);
+    };
+
+    next();
+};
+

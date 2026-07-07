@@ -26,3 +26,25 @@ exports.getUserProfile = async (req, res) => {
     }
 };
 
+exports.updateProfile = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const { full_name, bio, skills } = req.body;
+        const userId = req.userId;
+
+        const result = await query(
+            `UPDATE users 
+             SET full_name = COALESCE($1, full_name),
+                 bio = COALESCE($2, bio),
+                 skills = COALESCE($3, skills),
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = $4
+             RETURNING id, username, email, full_name, bio, skills, time_credits, rating_average`,
+            [full_name, bio, skills, userId]
+        );
+
+        

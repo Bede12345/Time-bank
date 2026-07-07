@@ -10,3 +10,14 @@ const {
     getTopUsers
 } = require('../controllers/userController');
 
+router.get('/top', getTopUsers);
+router.get('/:id/profile', getUserProfile);
+
+router.get('/me', authenticate, getUserProfile);
+router.put('/me', 
+    authenticate,
+    sanitize.user,
+    validators.register,
+    validate,
+    updateProfile
+);

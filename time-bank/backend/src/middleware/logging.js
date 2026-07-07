@@ -63,3 +63,19 @@ const performanceLogger = (req, res, next) => {
     next();
 };
 
+const securityLogger = (event, req, details = {}) => {
+    logger.warn({
+        type: 'security',
+        event,
+        ip: req.ip,
+        userAgent: req.get('user-agent'),
+        userId: req.userId,
+        ...details
+    });
+};
+
+module.exports = {
+    requestLogger,
+    performanceLogger,
+    securityLogger
+};

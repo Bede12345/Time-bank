@@ -123,3 +123,17 @@ const validate = (req, res, next) => {
     });
 };
 
+const sanitize = {
+    user: (req, res, next) => {
+        if (req.body.email) {
+            req.body.email = req.body.email.toLowerCase().trim();
+        }
+        if (req.body.username) {
+            req.body.username = req.body.username.trim();
+        }
+        if (req.body.full_name) {
+            req.body.full_name = req.body.full_name.trim();
+        }
+        next();
+    },
+    

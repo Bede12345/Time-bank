@@ -67,3 +67,9 @@ CREATE TABLE notifications (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE INDEX idx_offers_user_id ON offers(user_id);
+CREATE INDEX idx_offers_status ON offers(status);
+CREATE INDEX idx_transactions_requester ON transactions(requester_id);
+CREATE INDEX idx_transactions_provider ON transactions(provider_id);
+CREATE INDEX idx_ratings_rated_user ON ratings(rated_user_id);
+

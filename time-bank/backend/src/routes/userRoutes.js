@@ -21,3 +21,7 @@ router.put('/me',
     validate,
     updateProfile
 );
+router.get('/me/offers', authenticate, getUserOffers);
+router.get('/me/transactions', authenticate, getUserTransactions);
+
+module.exports = router;

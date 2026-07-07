@@ -15,4 +15,20 @@ passport.use(
                 [jwt_payload.userId]
             );
 
+             if (result.rows.length === 0) {
+                return done(null, false);
+            }
             
+            const user = result.rows[0];
+            if (!user.is_active) {
+                return done(null, false);
+            }
+            
+            return done(null, user);
+        } catch (error) {
+            return done(error, false);
+        }
+    })
+);
+
+module.exports = passport;

@@ -40,4 +40,19 @@ exports.register = async (req, res) => {
             skills: skills || []
         });
 
+        const token = generateToken(user.id);
+
+        logger.info(`User registered: ${user.username} (${user.email})`);
+
+        res.status(201).json({
+            success: true,
+            token,
+            user: {
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                full_name: user.full_name,
+                time_credits: user.time_credits
+            }
+        });
         

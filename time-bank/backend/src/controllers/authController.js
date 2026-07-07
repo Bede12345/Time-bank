@@ -31,4 +31,13 @@ exports.register = async (req, res) => {
             return res.status(400).json({ error: 'Username already taken' });
         }
 
+        const user = await User.create({
+            username,
+            email,
+            password,
+            full_name,
+            bio,
+            skills: skills || []
+        });
+
         

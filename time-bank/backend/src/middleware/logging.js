@@ -42,3 +42,24 @@ const requestLogger = (req, res, next) => {
     next();
 };
 
+const performanceLogger = (req, res, next) => {
+    const start = process.hrtime();
+    
+    res.on('finish', () => {
+        const diff = process.hrtime(start);
+        const duration = (diff[0] * 1e3 + diff[1] / 1e6).toFixed(2);
+        
+        if (duration > 1000) {
+            logger.warn({
+                type: 'slow_request',
+                method: req.method,
+                url: req.url,
+                duration: `${duration}ms`,
+                userId: req.userId
+            });
+        }
+    });
+    
+    next();
+};
+

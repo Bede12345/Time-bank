@@ -54,4 +54,37 @@ class User {
         return result.rows[0];
     }
 
-    
+    static async updateRating(userId, newRating) {
+        const result = await query(
+            `UPDATE users 
+             SET rating_average = (
+                 SELECT AVG(rating) 
+                 FROM ratings 
+                 WHERE rated_user_id = $1
+             ),
+             rating_count = rating_count + 1,
+             updated_at = CURRENT_TIMESTAMP
+             WHERE id = $1
+             RETURNING rating_average, rating_count`,
+            [userId]
+        );
+        return result.rows[0];
+    }
+
+    static async getStats(userId) {
+        const result = await query(
+            `SELECT 
+                (SELECT COUNT(*) FROM offers WHERE user_id = $1 AND type = 'offer') as offers_count,
+                (SELECT COUNT(*) FROM offers WHERE user_id = $1 AND type = 'request') as requests_count,
+                (SELECT COUNT(*) FROM transactions 
+                 WHERE (requester_id = $1 OR provider_id = $1) 
+                 AND status = 'completed') as completed_trades,
+                (SELECT COALESCE(AVG(rating), 0) FROM ratings WHERE rated_user_id = $1) as rating_avg
+             FROM users WHERE id = $1`,
+            [userId]
+        );
+        return result.rows[0];
+    }
+}
+
+module.exports = User;

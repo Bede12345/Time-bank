@@ -14,3 +14,18 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE offers (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(200) NOT NULL,
+    description TEXT NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    type VARCHAR(20) NOT NULL CHECK (type IN ('offer', 'request')),
+    credits_per_hour INTEGER NOT NULL CHECK (credits_per_hour > 0),
+    status VARCHAR(20) DEFAULT 'open' CHECK (status IN ('open', 'matched', 'completed', 'cancelled')),
+    location VARCHAR(100),
+    is_remote BOOLEAN DEFAULT false,
+    expires_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

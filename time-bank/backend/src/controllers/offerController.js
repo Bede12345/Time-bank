@@ -110,3 +110,23 @@ exports.updateOfferStatus = async (req, res) => {
 };
 
 
+exports.deleteOffer = async (req, res) => {
+    try {
+        const offerId = req.params.id;
+        const deleted = await Offer.delete(offerId, req.userId);
+        
+        if (!deleted) {
+            return res.status(404).json({ error: 'Offer not found or not authorized' });
+        }
+
+        logger.info(`Offer ${offerId} deleted by user ${req.userId}`);
+        
+        res.json({
+            success: true,
+            message: 'Offer deleted successfully'
+        });
+    } catch (error) {
+        logger.error('Delete offer error:', error);
+        res.status(500).json({ error: 'Failed to delete offer' });
+    }
+};

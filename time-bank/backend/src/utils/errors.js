@@ -119,3 +119,21 @@ const asyncHandler = (fn) => {
     };
 };
 
+const notFoundHandler = (req, res) => {
+    res.status(404).json({
+        success: false,
+        error: `Route not found: ${req.method} ${req.url}`
+    });
+};
+
+module.exports = {
+    AppError,
+    ValidationError,
+    AuthenticationError,
+    AuthorizationError,
+    NotFoundError,
+    ConflictError,
+    errorHandler,
+    asyncHandler,
+    notFoundHandler
+};

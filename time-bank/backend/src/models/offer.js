@@ -80,4 +80,23 @@ class Offer {
         return result.rows[0];
     }
 
-    
+    static async getUserOffers(userId) {
+        const result = await query(
+            `SELECT * FROM offers 
+             WHERE user_id = $1 
+             ORDER BY created_at DESC`,
+            [userId]
+        );
+        return result.rows;
+    }
+
+    static async delete(id, userId) {
+        const result = await query(
+            'DELETE FROM offers WHERE id = $1 AND user_id = $2 RETURNING id',
+            [id, userId]
+        );
+        return result.rows[0];
+    }
+}
+
+module.exports = Offer;

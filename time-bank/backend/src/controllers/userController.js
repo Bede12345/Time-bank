@@ -63,3 +63,19 @@ exports.updateProfile = async (req, res) => {
     }
 };
 
+exports.getUserOffers = async (req, res) => {
+    try {
+        const userId = req.params.id || req.userId;
+        const offers = await Offer.getUserOffers(userId);
+        
+        res.json({
+            success: true,
+            count: offers.length,
+            offers
+        });
+    } catch (error) {
+        logger.error('Get user offers error:', error);
+        res.status(500).json({ error: 'Failed to fetch user offers' });
+    }
+};
+

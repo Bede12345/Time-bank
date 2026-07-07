@@ -29,3 +29,20 @@ CREATE TABLE offers (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE transactions (
+    id SERIAL PRIMARY KEY,
+    offer_id INTEGER REFERENCES offers(id) ON DELETE CASCADE,
+    requester_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    provider_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'accepted', 'in_progress', 'completed', 'disputed')),
+    credits_held INTEGER NOT NULL,
+    hours_estimated INTEGER NOT NULL,
+    hours_actual INTEGER,
+    requester_confirmed BOOLEAN DEFAULT false,
+    provider_confirmed BOOLEAN DEFAULT false,
+    completion_date TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

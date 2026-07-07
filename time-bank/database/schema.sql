@@ -46,3 +46,14 @@ CREATE TABLE transactions (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE ratings (
+    id SERIAL PRIMARY KEY,
+    transaction_id INTEGER REFERENCES transactions(id) ON DELETE CASCADE,
+    rater_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    rated_user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    rating INTEGER CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(transaction_id, rater_id)
+);
+

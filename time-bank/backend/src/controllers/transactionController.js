@@ -77,3 +77,25 @@ exports.getTransactions = async (req, res) => {
     }
 };
 
+exports.getTransaction = async (req, res) => {
+    try {
+        const transaction = await Transaction.findById(req.params.id);
+        if (!transaction) {
+            return res.status(404).json({ error: 'Transaction not found' });
+        }
+
+        // Check if user is part of this transaction
+        if (transaction.requester_id !== req.userId && transaction.provider_id !== req.userId) {
+            return res.status(403).json({ error: 'Not authorized to view this transaction' });
+        }
+
+        res.json({
+            success: true,
+            transaction
+        });
+    } catch (error) {
+        logger.error('Get transaction error:', error);
+        res.status(500).json({ error: 'Failed to fetch transaction' });
+    }
+};
+

@@ -47,4 +47,19 @@ exports.updateProfile = async (req, res) => {
             [full_name, bio, skills, userId]
         );
 
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        logger.info(`User profile updated: ${userId}`);
         
+        res.json({
+            success: true,
+            user: result.rows[0]
+        });
+    } catch (error) {
+        logger.error('Update profile error:', error);
+        res.status(500).json({ error: 'Failed to update profile' });
+    }
+};
+

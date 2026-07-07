@@ -111,4 +111,23 @@ exports.confirmCompletion = async (req, res) => {
 
         if (transaction.status !== 'in_progress') {
             return res.status(400).json({ error: 'Transaction is not in progress' });
-            
+            }
+
+        const updated = await Transaction.confirmCompletion(transactionId, userId);
+        if (!updated) {
+            return res.status(403).json({ error: 'Not authorized to confirm this transaction' });
+        }
+
+        logger.info(`Transaction ${transactionId} confirmed by user ${userId}`);
+        
+        res.json({
+            success: true,
+            transaction: updated,
+            message: 'Completion confirmed. Waiting for other party.'
+        });
+    } catch (error) {
+        logger.error('Confirm completion error:', error);
+        res.status(500).json({ error: 'Failed to confirm completion' });
+    }
+};
+

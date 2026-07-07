@@ -66,3 +66,18 @@ exports.getOffer = async (req, res) => {
     }
 };
 
+exports.getMyOffers = async (req, res) => {
+    try {
+        const offers = await Offer.getUserOffers(req.userId);
+        
+        res.json({
+            success: true,
+            count: offers.length,
+            offers
+        });
+    } catch (error) {
+        logger.error('Get my offers error:', error);
+        res.status(500).json({ error: 'Failed to fetch your offers' });
+    }
+};
+

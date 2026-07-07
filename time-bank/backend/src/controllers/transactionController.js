@@ -99,3 +99,16 @@ exports.getTransaction = async (req, res) => {
     }
 };
 
+exports.confirmCompletion = async (req, res) => {
+    try {
+        const transactionId = req.params.id;
+        const userId = req.userId;
+
+        const transaction = await Transaction.findById(transactionId);
+        if (!transaction) {
+            return res.status(404).json({ error: 'Transaction not found' });
+        }
+
+        if (transaction.status !== 'in_progress') {
+            return res.status(400).json({ error: 'Transaction is not in progress' });
+            

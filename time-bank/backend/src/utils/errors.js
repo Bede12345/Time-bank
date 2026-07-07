@@ -22,3 +22,24 @@ class AuthenticationError extends AppError {
     }
 }
 
+class AuthorizationError extends AppError {
+    constructor(message = 'Not authorized') {
+        super(message, 403);
+        this.name = 'AuthorizationError';
+    }
+}
+
+class NotFoundError extends AppError {
+    constructor(resource = 'Resource') {
+        super(`${resource} not found`, 404);
+        this.name = 'NotFoundError';
+    }
+}
+
+class ConflictError extends AppError {
+    constructor(message = 'Resource already exists') {
+        super(message, 409);
+        this.name = 'ConflictError';
+    }
+}
+

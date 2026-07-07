@@ -11,4 +11,18 @@ exports.getUserProfile = async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
+        const stats = await User.getStats(userId);
         
+        res.json({
+            success: true,
+            user: {
+                ...user,
+                stats
+            }
+        });
+    } catch (error) {
+        logger.error('Get user profile error:', error);
+        res.status(500).json({ error: 'Failed to fetch user profile' });
+    }
+};
+

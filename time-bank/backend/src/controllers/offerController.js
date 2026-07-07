@@ -28,3 +28,24 @@ exports.createOffer = async (req, res) => {
     }
 };
 
+exports.getOffers = async (req, res) => {
+    try {
+        const filters = {
+            category: req.query.category,
+            type: req.query.type,
+            limit: req.query.limit || 50
+        };
+
+        const offers = await Offer.findAll(filters);
+        
+        res.json({
+            success: true,
+            count: offers.length,
+            offers
+        });
+    } catch (error) {
+        logger.error('Get offers error:', error);
+        res.status(500).json({ error: 'Failed to fetch offers' });
+    }
+};
+

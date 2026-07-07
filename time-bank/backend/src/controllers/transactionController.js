@@ -62,3 +62,18 @@ exports.createTransaction = async (req, res) => {
     }
 };
 
+exports.getTransactions = async (req, res) => {
+    try {
+        const transactions = await Transaction.findByUser(req.userId);
+        
+        res.json({
+            success: true,
+            count: transactions.length,
+            transactions
+        });
+    } catch (error) {
+        logger.error('Get transactions error:', error);
+        res.status(500).json({ error: 'Failed to fetch transactions' });
+    }
+};
+

@@ -43,4 +43,19 @@ const validators = {
             .withMessage('Password is required')
     ],
 
-    
+    createOffer: [
+        body('title')
+            .notEmpty()
+            .withMessage('Title is required')
+            .isLength({ max: 200 })
+            .withMessage('Title cannot exceed 200 characters'),
+        body('description')
+            .notEmpty()
+            .withMessage('Description is required')
+            .isLength({ max: 2000 })
+            .withMessage('Description cannot exceed 2000 characters'),
+        body('category')
+            .notEmpty()
+            .withMessage('Category is required')
+            .isIn(['Technology', 'Education', 'Home Services', 'Creative', 'Health', 'Business', 'Other'])
+            

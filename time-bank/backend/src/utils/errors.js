@@ -71,4 +71,18 @@ const errorHandler = (err, req, res, next) => {
         });
     }
 
+    if (err.name === 'JsonWebTokenError') {
+        return res.status(401).json({
+            success: false,
+            error: 'Invalid token'
+        });
+    }
+
+    if (err.name === 'TokenExpiredError') {
+        return res.status(401).json({
+            success: false,
+            error: 'Token expired'
+        });
+    }
+
     

@@ -131,3 +131,14 @@ exports.confirmCompletion = async (req, res) => {
     }
 };
 
+exports.updateTransactionStatus = async (req, res) => {
+    try {
+        const { status } = req.body;
+        const transactionId = req.params.id;
+
+        const transaction = await Transaction.findById(transactionId);
+        if (!transaction) {
+            return res.status(404).json({ error: 'Transaction not found' });
+        }
+
+        

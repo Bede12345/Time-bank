@@ -107,4 +107,18 @@ exports.getTopUsers = async (req, res) => {
             [limit]
         );
 
-        
+        res.json({
+            success: true,
+            count: result.rows.length,
+            users: result.rows
+        });
+    } catch (error) {
+        logger.error('Get top users error:', error);
+        res.status(500).json({ error: 'Failed to fetch top users' });
+    }
+};
+
+// Helper function for queries (import this at top)
+const { query } = require('../config/database');
+const Offer = require('../models/Offer');
+const Transaction = require('../models/Transaction');

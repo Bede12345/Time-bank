@@ -81,3 +81,32 @@ exports.getMyOffers = async (req, res) => {
     }
 };
 
+exports.updateOfferStatus = async (req, res) => {
+    try {
+        const { status } = req.body;
+        const offerId = req.params.id;
+
+        const offer = await Offer.findById(offerId);
+        if (!offer) {
+            return res.status(404).json({ error: 'Offer not found' });
+        }
+
+        if (offer.user_id !== req.userId) {
+            return res.status(403).json({ error: 'Not authorized to update this offer' });
+        }
+
+        const updated = await Offer.updateStatus(offerId, status);
+        
+        logger.info(`Offer ${offerId} status updated to ${status} by user ${req.userId}`);
+        
+        res.json({
+            success: true,
+            offer: updated
+        });
+    } catch (error) {
+        logger.error('Update offer error:', error);
+        res.status(500).json({ error: 'Failed to update offer' });
+    }
+};
+
+

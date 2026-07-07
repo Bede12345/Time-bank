@@ -32,4 +32,26 @@ class User {
         return result.rows[0];
     }
 
+    static async findById(id) {
+        const result = await query(
+            `SELECT id, username, email, full_name, bio, skills, time_credits, 
+                    rating_average, rating_count, is_active, created_at
+             FROM users WHERE id = $1`,
+            [id]
+        );
+        return result.rows[0];
+    }
+
+    static async updateCredits(userId, amount) {
+        const result = await query(
+            `UPDATE users 
+             SET time_credits = time_credits + $1,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = $2
+             RETURNING time_credits`,
+            [amount, userId]
+        );
+        return result.rows[0];
+    }
+
     

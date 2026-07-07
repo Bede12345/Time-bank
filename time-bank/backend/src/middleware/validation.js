@@ -18,4 +18,19 @@ const validators = {
             .withMessage('Password must be at least 6 characters')
             .matches(/^(?=.*[A-Za-z])(?=.*\d)/)
             .withMessage('Password must contain at least one letter and one number'),
-        
+        body('full_name')
+            .notEmpty()
+            .withMessage('Full name is required')
+            .isLength({ max: 100 })
+            .withMessage('Full name cannot exceed 100 characters'),
+        body('bio')
+            .optional()
+            .isLength({ max: 500 })
+            .withMessage('Bio cannot exceed 500 characters'),
+        body('skills')
+            .optional()
+            .isArray()
+            .withMessage('Skills must be an array')
+    ],
+
+    

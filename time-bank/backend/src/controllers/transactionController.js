@@ -145,4 +145,18 @@ exports.updateTransactionStatus = async (req, res) => {
             return res.status(403).json({ error: 'Not authorized' });
         }
 
+        const validTransitions = {
+            'pending': ['accepted', 'cancelled'],
+            'accepted': ['in_progress', 'cancelled'],
+            'in_progress': ['completed', 'disputed']
+        };
+
+        if (!validTransitions[transaction.status]?.includes(status)) {
+            return res.status(400).json({ 
+                error: `Invalid status transition from ${transaction.status} to ${status}` 
+            });
+        }
+
+        const updated = await Transaction.updateStatus(transactionId, status);
+
         

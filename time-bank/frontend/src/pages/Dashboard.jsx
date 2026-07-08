@@ -13,6 +13,20 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  const handleTransactionAction = async (id, action) => {
+  try {
+    if (action === 'confirm') {
+      await api.patch(`/transactions/${id}/confirm`);
+    } else {
+      await api.patch(`/transactions/${id}/status`, { status: action });
+    }
+    toast.success('Updated!');
+    fetchData();
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Action failed');
+  }
+};
+
   const fetchData = async () => {
     try {
       const [offersRes, transactionsRes] = await Promise.all([
@@ -110,6 +124,31 @@ const Dashboard = () => {
                     )}>
                       {tx.status}
                     </span>
+                    <div className="mt-3 flex gap-2">
+                     {tx.status === 'pending' && tx.provider_id === user?.id && (
+                     <button onClick={() => handleTransactionAction(tx.id, 'accepted')}
+                      className="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">
+                      Accept
+                     </button>
+                    )}
+                   {tx.status === 'accepted' && (
+                    <button onClick={() => handleTransactionAction(tx.id, 'in_progress')}
+                     className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                     Start Work
+                    </button>
+                   )}
+                  {tx.status === 'in_progress' && (
+                  (tx.requester_id === user?.id && tx.requester_confirmed) ||
+                  (tx.provider_id === user?.id && tx.provider_confirmed)
+                  ) ? (
+                     <span className="text-sm text-gray-500 italic">Waiting for other party...</span>
+                  ) : tx.status === 'in_progress' && (
+                    <button onClick={() => handleTransactionAction(tx.id, 'confirm')}
+                     className="bg-purple-600 text-white px-3 py-1 rounded text-sm hover:bg-purple-700">
+                     Confirm Completion
+                    </button>
+                  )}
+                </div>
                   </div>
                 </div>
               ))}

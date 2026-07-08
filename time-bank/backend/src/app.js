@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const { requestLogger } = require('./utils/logger');
+const { notFoundHandler, errorHandler } = require('./utils/errors');
 const routes = require('./routes/index');
 
 const app = express();

@@ -74,4 +74,4 @@ Tables: users, offers, transactions, ratings, notifications
 Schema file: database/schema.sql
 
 
-        programmed and implemented by: - Bedemariyam Tamirat Ali 
+        programmed and implemented by: - Bedemariyam Tamirat Ali

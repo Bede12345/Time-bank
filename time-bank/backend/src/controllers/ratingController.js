@@ -13,7 +13,6 @@ exports.createRating = async (req, res) => {
         const { transaction_id, rated_user_id, rating, comment } = req.body;
         const rater_id = req.userId;
 
-        // Check if transaction exists and is completed
         const transaction = await Transaction.findById(transaction_id);
         if (!transaction) {
             return res.status(404).json({ error: 'Transaction not found' });
@@ -23,17 +22,14 @@ exports.createRating = async (req, res) => {
             return res.status(400).json({ error: 'Transaction must be completed before rating' });
         }
 
-        // Check if user is part of the transaction
         if (transaction.requester_id !== rater_id && transaction.provider_id !== rater_id) {
             return res.status(403).json({ error: 'You are not part of this transaction' });
         }
 
-        // Can't rate yourself
         if (rater_id === rated_user_id) {
             return res.status(400).json({ error: 'You cannot rate yourself' });
         }
 
-        // Check if already rated
         try {
             const newRating = await Rating.create({
                 transaction_id,
@@ -43,7 +39,7 @@ exports.createRating = async (req, res) => {
                 comment
             });
 
-            logger.info(Rating created for transaction  by user );
+            logger.info('Rating created for transaction ' + transaction_id + ' by user ' + rater_id);
             
             res.status(201).json({
                 success: true,
@@ -120,7 +116,7 @@ exports.deleteRating = async (req, res) => {
             return res.status(404).json({ error: 'Rating not found or not authorized' });
         }
 
-        logger.info(Rating  deleted by user );
+        logger.info('Rating ' + ratingId + ' deleted by user ' + req.userId);
         
         res.json({
             success: true,

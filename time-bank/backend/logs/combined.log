@@ -176,3 +176,17 @@
 {"level":"info","message":"Server running on port 5000","timestamp":"2026-07-07 22:13:38"}
 {"level":"info","message":"Environment: development","timestamp":"2026-07-07 22:13:38"}
 {"level":"info","message":"Health check: http://localhost:5000/health","timestamp":"2026-07-07 22:13:38"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-07-07 22:28:34"}
+{"level":"info","message":"Environment: development","timestamp":"2026-07-07 22:28:34"}
+{"level":"info","message":"Health check: http://localhost:5000/health","timestamp":"2026-07-07 22:28:34"}
+{"level":"info","message":{"duration":"71ms","ip":"::1","method":"GET","status":304,"url":"/","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 22:30:21"}
+{"level":"info","message":{"duration":"2ms","ip":"::1","method":"GET","status":304,"url":"/","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 22:30:21"}
+{"level":"info","message":{"duration":"64ms","ip":"::1","method":"GET","status":304,"url":"/me","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 22:30:21"}
+{"level":"info","message":{"duration":"3ms","ip":"::1","method":"GET","status":304,"url":"/me","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 22:30:21"}
+{"level":"info","message":{"duration":"4ms","ip":"::1","method":"GET","status":304,"url":"/my","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 22:30:25"}
+{"level":"info","message":{"duration":"3ms","ip":"::1","method":"GET","status":304,"url":"/","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 22:30:25"}
+{"level":"info","message":{"duration":"3ms","ip":"::1","method":"GET","status":304,"url":"/my","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 22:30:25"}
+{"level":"info","message":{"duration":"6ms","ip":"::1","method":"GET","status":304,"url":"/","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 22:30:25"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-07-07 22:43:46"}
+{"level":"info","message":"Environment: development","timestamp":"2026-07-07 22:43:46"}
+{"level":"info","message":"Health check: http://localhost:5000/health","timestamp":"2026-07-07 22:43:46"}

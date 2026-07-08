@@ -72,3 +72,6 @@ GET /api/notifications - Get notifications
 Database Schema
 Tables: users, offers, transactions, ratings, notifications
 Schema file: database/schema.sql
+
+
+        programmed and implemented by: - Bedemariyam Tamirat Ali 

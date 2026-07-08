@@ -44,7 +44,9 @@ const Dashboard = () => {
             </div>
             <div>
               <p className="text-sm opacity-75">Rating</p>
-              <p className="text-2xl font-bold">{user?.rating_average?.toFixed(1) || 'N/A'}</p>
+              <p className="text-2xl font-bold">
+                {user?.rating_average ? Number(user.rating_average).toFixed(1) : 'N/A'}
+              </p>
             </div>
             <div>
               <p className="text-sm opacity-75">My Offers</p>

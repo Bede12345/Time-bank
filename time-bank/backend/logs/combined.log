@@ -96,3 +96,28 @@
 {"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 16:08:54"}
 {"level":"info","message":{"duration":"129ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 16:08:54"}
 {"level":"info","message":{"duration":"140ms","ip":"::1","method":"POST","status":401,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.2506"},"timestamp":"2026-07-07 16:14:13"}
+{"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 16:29:19"}
+{"level":"info","message":{"duration":"141ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 16:29:19"}
+{"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 16:30:14"}
+{"level":"info","message":{"duration":"150ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 16:30:14"}
+{"level":"info","message":"User logged in: john_doe (john@example.com)","timestamp":"2026-07-07 16:33:11"}
+{"level":"info","message":{"duration":"142ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 16:33:11"}
+{"level":"info","message":"User logged in: john_doe (john@example.com)","timestamp":"2026-07-07 16:33:39"}
+{"level":"info","message":{"duration":"106ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 16:33:39"}
+{"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 20:21:16"}
+{"level":"info","message":{"duration":"218ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 20:21:16"}
+{"level":"info","message":{"duration":"210ms","ip":"::1","method":"POST","status":401,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 20:24:56"}
+{"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 20:25:08"}
+{"level":"info","message":{"duration":"162ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 20:25:08"}
+{"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 20:26:00"}
+{"level":"info","message":{"duration":"333ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 20:26:00"}
+{"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 20:26:20"}
+{"level":"info","message":{"duration":"167ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 20:26:20"}
+{"level":"info","message":"User logged in: john_doe (john@example.com)","timestamp":"2026-07-07 20:26:45"}
+{"level":"info","message":{"duration":"166ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 20:26:45"}
+{"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 20:27:18"}
+{"level":"info","message":{"duration":"221ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 20:27:18"}
+{"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 20:31:13"}
+{"level":"info","message":{"duration":"218ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 20:31:13"}
+{"level":"info","message":"User logged in: abebe123 (abebe@beso.com)","timestamp":"2026-07-07 20:35:29"}
+{"level":"info","message":{"duration":"214ms","ip":"::1","method":"POST","status":200,"url":"/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 OPR/132.0.0.0 (Edition std-2)"},"timestamp":"2026-07-07 20:35:29"}

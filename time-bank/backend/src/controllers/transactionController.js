@@ -12,14 +12,14 @@ exports.createTransaction = async (req, res) => {
         }
 
         const { offer_id, hours_estimated } = req.body;
-        const requesterId = req.userId;
+        const respondingUserId = req.userId; // whoever clicked the button
 
         const offer = await Offer.findById(offer_id);
         if (!offer) {
             return res.status(404).json({ error: 'Offer not found' });
         }
 
-        if (offer.user_id === requesterId) {
+        if (offer.user_id === respondingUserId) {
             return res.status(400).json({ error: 'Cannot request your own offer' });
         }
 
@@ -29,25 +29,35 @@ exports.createTransaction = async (req, res) => {
 
         const credits_held = offer.credits_per_hour * hours_estimated;
 
-        const requester = await User.findById(requesterId);
-        if (requester.time_credits < credits_held) {
+        let requester_id, provider_id;
+        if (offer.type === 'offer') {
+
+            provider_id = offer.user_id;
+            requester_id = respondingUserId;
+        } else {
+
+            requester_id = offer.user_id;
+            provider_id = respondingUserId;
+        }
+
+        const payer = await User.findById(requester_id);
+        if (payer.time_credits < credits_held) {
             return res.status(400).json({ 
                 error: 'Insufficient time credits',
                 required: credits_held,
-                available: requester.time_credits
+                available: payer.time_credits
             });
         }
 
         const transaction = await Transaction.create({
             offer_id,
-            requester_id: requesterId,
-            provider_id: offer.user_id,
+            requester_id,
+            provider_id,
             credits_held,
             hours_estimated
         });
 
-        await User.updateCredits(requesterId, -credits_held);
-
+        await User.updateCredits(requester_id, -credits_held);
         await Offer.updateStatus(offer_id, 'matched');
 
         logger.info(`Transaction created: ${transaction.id} for offer ${offer_id}`);

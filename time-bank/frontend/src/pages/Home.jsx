@@ -92,11 +92,11 @@ const Home = () => {
                   </span>
                   {isAuthenticated && offer.user_id !== user?.id && offer.status === 'open' && (
                     <Link
-                      to={/offer/}
+                      to={`/offer/${offer.id}`}
                       className="text-blue-600 hover:text-blue-800 font-medium"
                     >
                       View Details →
-                    </Link>
+</Link>
                   )}
                 </div>
               </div>

@@ -13,6 +13,39 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+const [ratingForms, setRatingForms] = useState({}); // { [txId]: { rating, comment } }
+const [ratedTransactions, setRatedTransactions] = useState(new Set());
+
+const handleRatingChange = (txId, field, value) => {
+  setRatingForms(prev => ({
+    ...prev,
+    [txId]: { ...prev[txId], [field]: value }
+  }));
+};
+
+const submitRating = async (tx) => {
+  const form = ratingForms[tx.id] || {};
+  if (!form.rating) {
+    toast.error('Please select a rating');
+    return;
+  }
+
+  const rated_user_id = tx.requester_id === user?.id ? tx.provider_id : tx.requester_id;
+
+  try {
+    await api.post('/ratings', {
+      transaction_id: tx.id,
+      rated_user_id,
+      rating: form.rating,
+      comment: form.comment || '',
+    });
+    toast.success('Rating submitted!');
+    setRatedTransactions(prev => new Set(prev).add(tx.id));
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to submit rating');
+  }
+};
+
   const handleTransactionAction = async (id, action) => {
   try {
     if (action === 'confirm') {
@@ -148,6 +181,41 @@ const Dashboard = () => {
                      Confirm Completion
                     </button>
                   )}
+                  {tx.status === 'completed' && !ratedTransactions.has(tx.id) && (
+                   <div className="mt-3 border-t pt-3">
+                      <p className="text-sm font-medium text-gray-700 mb-1">Rate this exchange:</p>
+                   <div className="flex gap-1 mb-2">
+                     {[1, 2, 3, 4, 5].map(star => (
+                      <button
+                        key={star}
+                        type="button"
+                        onClick={() => handleRatingChange(tx.id, 'rating', star)}
+                        className={`text-2xl ${
+                        (ratingForms[tx.id]?.rating || 0) >= star ? 'text-yellow-400' : 'text-gray-300'
+                  }`}
+                 >
+                     ★
+                     </button>
+                ))}
+                       </div>
+                    <textarea
+                         placeholder="Optional comment..."
+                         className="w-full border rounded px-2 py-1 text-sm mb-2"
+                         rows="2"
+                         value={ratingForms[tx.id]?.comment || ''}
+                         onChange={(e) => handleRatingChange(tx.id, 'comment', e.target.value)}
+                       />
+                     <button
+                        onClick={() => submitRating(tx)}
+                        className="bg-yellow-500 text-white px-4 py-1 rounded text-sm hover:bg-yellow-600"
+                     >
+                      Submit Rating
+                        </button>
+                            </div>
+                   )}
+                    {tx.status === 'completed' && ratedTransactions.has(tx.id) && (
+  <p className="mt-3 text-sm text-green-600">✓ Rating submitted</p>
+                     )}
                 </div>
                   </div>
                 </div>

@@ -103,7 +103,23 @@ const validators = {
         param('id')
             .isInt()
             .withMessage('Invalid ID format')
-    ]
+    ],
+    updateProfile: [
+        body('full_name')
+            .optional()
+            .notEmpty()
+            .withMessage('Full name cannot be empty')
+            .isLength({ max: 100 })
+        .withMessage('Full name cannot exceed 100 characters'),
+    body('bio')
+        .optional()
+        .isLength({ max: 500 })
+        .withMessage('Bio cannot exceed 500 characters'),
+    body('skills')
+        .optional()
+        .isArray()
+        .withMessage('Skills must be an array')
+],
 };
 
 const validate = (req, res, next) => {

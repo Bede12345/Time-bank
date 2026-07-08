@@ -17,7 +17,7 @@ router.get('/me', authenticate, getUserProfile);
 router.put('/me', 
     authenticate,
     sanitize.user,
-    validators.register,
+    validators.updateProfile,
     validate,
     updateProfile
 );

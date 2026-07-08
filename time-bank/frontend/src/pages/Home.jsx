@@ -90,14 +90,6 @@ const Home = () => {
                   <span className={'text-xs px-2 py-1 rounded ' + (offer.status === 'open' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800')}>
                     {offer.status}
                   </span>
-                  {isAuthenticated && offer.user_id !== user?.id && offer.status === 'open' && (
-                    <Link
-                      to={`/offer/${offer.id}`}
-                      className="text-blue-600 hover:text-blue-800 font-medium"
-                    >
-                      View Details →
-</Link>
-                  )}
                 </div>
               </div>
             ))}

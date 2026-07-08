@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 require('dotenv').config();
+types.setTypeParser(1700, (val) => parseFloat(val));
 
 const pool = new Pool({
     host: process.env.DB_HOST,

@@ -8,9 +8,11 @@ const { requestLogger } = require('./utils/logger');
 const authRoutes = require('./routes/authRoutes');
 const offerRoutes = require('./routes/offerRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
+app.use('/api/users', userRoutes);
 app.use(helmet());
 app.use(cors());
 app.use(express.json());

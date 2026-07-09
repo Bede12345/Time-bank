@@ -32,6 +32,51 @@ const Dashboard = () => {
     return <div className="loading">Loading...</div>;
   }
 
+  const handleTransactionAction = async (id, action) => {
+  try {
+    if (action === 'confirm') {
+      await api.patch(`/transactions/${id}/confirm`);
+    } else {
+      await api.patch(`/transactions/${id}/status`, { status: action });
+    }
+    toast.success('Updated!');
+    fetchData();
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Action failed');
+  }
+};
+
+const [ratingForms, setRatingForms] = useState({});
+const [ratedTransactions, setRatedTransactions] = useState(new Set());
+
+const handleRatingChange = (txId, field, value) => {
+  setRatingForms(prev => ({
+    ...prev,
+    [txId]: { ...prev[txId], [field]: value }
+  }));
+};
+
+const submitRating = async (tx) => {
+  const form = ratingForms[tx.id] || {};
+  if (!form.rating) {
+    toast.error('Please select a rating');
+    return;
+  }
+  const rated_user_id = tx.requester_id === user?.id ? tx.provider_id : tx.requester_id;
+  try {
+    await api.post('/ratings', {
+      transaction_id: tx.id,
+      rated_user_id,
+      rating: form.rating,
+      comment: form.comment || '',
+    });
+    toast.success('Rating submitted!');
+    setRatedTransactions(prev => new Set(prev).add(tx.id));
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to submit rating');
+  }
+};
+
   const getStatusClass = (status) => {
     const statusMap = {
       'open': 'open',
@@ -104,6 +149,67 @@ const Dashboard = () => {
                     {tx.status}
                   </span>
                 </div>
+                <div style={{ marginTop: '10px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                     {tx.status === 'pending' && tx.provider_id === user?.id && (
+                        <button onClick={() => handleTransactionAction(tx.id, 'accepted')} className="btn-create">
+                            Accept
+                        </button>
+                      )}
+                     {tx.status === 'accepted' && (
+                       <button onClick={() => handleTransactionAction(tx.id, 'in_progress')} className="btn-create">
+                        Start Work
+                       </button>
+                     )}
+                     {tx.status === 'in_progress' && (
+                     ((tx.requester_id === user?.id && tx.requester_confirmed) ||
+                     (tx.provider_id === user?.id && tx.provider_confirmed)) ? (
+                     <span style={{ fontSize: '14px', color: '#6b7280', fontStyle: 'italic' }}>
+                     Waiting for other party...
+                    </span>
+                    ) : (
+                    <button onClick={() => handleTransactionAction(tx.id, 'confirm')} className="btn-create">
+                     Confirm Completion
+                    </button>
+                   )
+                )}
+                </div>
+
+               {tx.status === 'completed' && !ratedTransactions.has(tx.id) && (
+                  <div style={{ marginTop: '10px', borderTop: '1px solid #f3f4f6', paddingTop: '10px' }}>
+                    <p style={{ fontSize: '14px', fontWeight: 500, marginBottom: '6px' }}>Rate this exchange:</p>
+                 <div style={{ display: 'flex', gap: '4px', marginBottom: '8px' }}>
+                  {[1, 2, 3, 4, 5].map(star => (
+                       <button
+                        key={star}
+                        type="button"
+                        onClick={() => handleRatingChange(tx.id, 'rating', star)}
+                        style={{
+                        fontSize: '22px',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: (ratingForms[tx.id]?.rating || 0) >= star ? '#facc15' : '#d1d5db'
+                 }}
+                   >
+                    ★
+                     </button>
+                 ))}
+                </div>
+                    <textarea
+                    placeholder="Optional comment..."
+                    rows="2"
+                    style={{ width: '100%', padding: '6px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '14px', marginBottom: '8px' }}
+                    value={ratingForms[tx.id]?.comment || ''}
+                    onChange={(e) => handleRatingChange(tx.id, 'comment', e.target.value)}
+                    />
+                    <button onClick={() => submitRating(tx)} className="btn-create">
+                    Submit Rating
+                    </button>
+                </div>
+                )}
+                {tx.status === 'completed' && ratedTransactions.has(tx.id) && (
+                 <p style={{ marginTop: '10px', fontSize: '14px', color: '#059669' }}>✓ Rating submitted</p>
+                )}
               </div>
             ))
           )}

@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
   
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
   
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -43,9 +43,9 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <div className="min-h-screen bg-gray-50">
-          <Navbar />
-          <AppRoutes />
+        <Navbar />
+        <AppRoutes />
+        <div className="toast-container">
           <Toaster position="top-right" />
         </div>
       </AuthProvider>

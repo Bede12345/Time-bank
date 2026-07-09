@@ -44,48 +44,39 @@ const CreateOffer = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto max-w-2xl px-4">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">Create New Offer</h1>
+    <div className="create-offer-page">
+      <div className="container">
+        <h1>Create New Offer</h1>
         
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title *
-            </label>
+        <form className="create-offer-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Title *</label>
             <input
               type="text"
               name="title"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={formData.title}
               onChange={handleChange}
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Description *
-            </label>
+          <div className="form-group">
+            <label>Description *</label>
             <textarea
               name="description"
               rows="4"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={formData.description}
               onChange={handleChange}
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Category *
-              </label>
+          <div className="form-row">
+            <div className="form-group">
+              <label>Category *</label>
               <select
                 name="category"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={formData.category}
                 onChange={handleChange}
               >
@@ -95,14 +86,11 @@ const CreateOffer = () => {
               </select>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Type *
-              </label>
+            <div className="form-group">
+              <label>Type *</label>
               <select
                 name="type"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={formData.type}
                 onChange={handleChange}
               >
@@ -112,62 +100,45 @@ const CreateOffer = () => {
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Credits per Hour *
-            </label>
+          <div className="form-group">
+            <label>Credits per Hour *</label>
             <input
               type="number"
               name="credits_per_hour"
               required
               min="1"
               max="100"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={formData.credits_per_hour}
               onChange={handleChange}
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Location
-            </label>
+          <div className="form-group">
+            <label>Location</label>
             <input
               type="text"
               name="location"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="e.g. New York, Online, etc."
               value={formData.location}
               onChange={handleChange}
             />
           </div>
 
-          <div className="flex items-center">
+          <div className="checkbox-group">
             <input
               type="checkbox"
               name="is_remote"
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               checked={formData.is_remote}
               onChange={handleChange}
             />
-            <label className="ml-2 block text-sm text-gray-700">
-              Remote / Online
-            </label>
+            <label>Remote / Online</label>
           </div>
 
-          <div className="flex justify-end space-x-4 pt-4">
-            <button
-              type="button"
-              onClick={() => navigate('/')}
-              className="px-6 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition"
-            >
+          <div className="form-actions">
+            <button type="button" className="btn-cancel" onClick={() => navigate('/')}>
               Cancel
             </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:opacity-50"
-            >
+            <button type="submit" className="btn-create" disabled={loading}>
               {loading ? 'Creating...' : 'Create Offer'}
             </button>
           </div>

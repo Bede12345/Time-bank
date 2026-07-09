@@ -118,7 +118,6 @@ exports.getTopUsers = async (req, res) => {
     }
 };
 
-// Helper function for queries (import this at top)
 const { query } = require('../config/database');
 const Offer = require('../models/Offer');
 const Transaction = require('../models/Transaction');

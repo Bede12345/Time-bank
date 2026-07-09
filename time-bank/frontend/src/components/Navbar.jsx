@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="text-2xl font-bold text-blue-600">
-            ⏰ Time-Bank
+            Time-Bank
           </Link>
 
           <div className="flex items-center space-x-4">
@@ -33,7 +33,7 @@ const Navbar = () => {
                   Create Offer
                 </Link>
                 <div className="text-sm text-gray-500">
-                  👋 {user?.username} ({user?.time_credits} credits)
+                   {user?.username} ({user?.time_credits} credits)
                 </div>
                 <button
                   onClick={handleLogout}

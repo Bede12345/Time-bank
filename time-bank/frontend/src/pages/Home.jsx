@@ -24,6 +24,24 @@ const Home = () => {
     }
   };
 
+  const [requestingId, setRequestingId] = useState(null);
+
+const handleRequest = async (offerId) => {
+  setRequestingId(offerId);
+  try {
+    await api.post('/transactions', {
+      offer_id: offerId,
+      hours_estimated: 1,
+    });
+    toast.success('Request sent!');
+    fetchOffers();
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to send request');
+  } finally {
+    setRequestingId(null);
+  }
+};
+
   return (
     <div>
       <section className="hero">
@@ -77,7 +95,14 @@ const Home = () => {
                       {offer.status}
                     </span>
                     {isAuthenticated && offer.user_id !== user?.id && offer.status === 'open' && (
-                      <Link to={/offer/} className="offer-link">View Details →</Link>
+                     <button
+                         onClick={() => handleRequest(offer.id)}
+                         disabled={requestingId === offer.id}
+                         className="btn-create-offer"
+                         style={{ padding: '6px 16px', fontSize: '14px' }}
+                     >
+                      {requestingId === offer.id ? 'Requesting...' : 'Request This'}
+                    </button>
                     )}
                   </div>
                 </div>

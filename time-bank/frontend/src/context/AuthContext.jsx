@@ -10,10 +10,10 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      console.log('✅ Token found in localStorage');
+      console.log('Token found in localStorage');
       fetchProfile();
     } else {
-      console.log('⚠️ No token found, skipping profile fetch');
+      console.log('No token found, skipping profile fetch');
       setLoading(false);
     }
   }, []);
@@ -22,10 +22,10 @@ export const AuthProvider = ({ children }) => {
     try {
       console.log('📡 Fetching profile...');
       const response = await api.get('/auth/me');
-      console.log('✅ Profile fetched:', response.data);
+      console.log('Profile fetched:', response.data);
       setUser(response.data);
     } catch (error) {
-      console.error('❌ Failed to fetch profile:', error);
+      console.error('Failed to fetch profile:', error);
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       setUser(null);
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
       console.log('📡 Logging in...');
       const response = await api.post('/auth/login', { email, password });
       const { token, user } = response.data;
-      console.log('✅ Login successful');
+      console.log('Login successful');
       
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
-      console.error('❌ Login failed:', error);
+      console.error('Login failed:', error);
       return { 
         success: false, 
         error: error.response?.data?.error || 'Login failed' 
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
       console.log('📡 Registering...');
       const response = await api.post('/auth/register', userData);
       const { token, user } = response.data;
-      console.log('✅ Registration successful');
+      console.log('Registration successful');
       
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
-      console.error('❌ Registration failed:', error);
+      console.error('Registration failed:', error);
       return { 
         success: false, 
         error: error.response?.data?.error || 'Registration failed' 
@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    console.log('👋 Logging out');
+    console.log('Logging out');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     delete api.defaults.headers.common['Authorization'];

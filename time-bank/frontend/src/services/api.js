@@ -14,9 +14,9 @@ api.interceptors.request.use(
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      console.log('✅ Token attached:', token.substring(0, 20) + '...');
+      console.log('Token attached:', token.substring(0, 20) + '...');
     } else {
-      console.log('⚠️ No token found in localStorage');
+      console.log('No token found in localStorage');
     }
     return config;
   },
@@ -30,7 +30,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      console.log('❌ Unauthorized - logging out');
+      console.log('Unauthorized - logging out');
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.href = '/login';

@@ -8,7 +8,7 @@ A barter economy platform where users trade services using "time credits" — no
 - Escrow-based transaction system
 - Rating system for completed trades
 - User dashboard with credits and history
-- Real-time notifications
+- Notification system
 
 ## Tech Stack
 - **Backend**: Node.js, Express.js, PostgreSQL
@@ -46,6 +46,8 @@ DB_NAME=timebank
 DB_USER=postgres
 DB_PASSWORD=your_password
 JWT_SECRET=your_secret_key
+JWT_EXPIRE=7d
+BCRYPT_ROUNDS=10
 API Endpoints
 POST /api/auth/register - Register user
 
@@ -69,9 +71,15 @@ POST /api/ratings - Create rating
 
 GET /api/notifications - Get notifications
 
+## Extra Features (Beyond Course Scope)
+- Escrow-style dual-confirmation transaction system — credits are held on the requester when a transaction is created, and only transferred to the provider once **both** parties independently confirm completion
+- Global PostgreSQL type parser for DECIMAL/NUMERIC columns, converting them to proper JS numbers (avoids the default string-return behavior of the `pg` driver)
+- Custom error class hierarchy (`AppError`, `ValidationError`, `AuthenticationError`, etc.) with centralized error-handling middleware
+- Input validation and sanitization middleware (express-validator)
+
 Database Schema
 Tables: users, offers, transactions, ratings, notifications
 Schema file: database/schema.sql
 
-
-        programmed and implemented by: - Bedemariyam Tamirat Ali
+---
+programmed and implemented by: - Bedemariyam Tamirat Ali

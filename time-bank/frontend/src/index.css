@@ -84,3 +84,20 @@ a {
   background: #1d4ed8;
 }
 
+.btn-register {
+  background: #2563eb;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.btn-register:hover {
+  background: #1d4ed8;
+}
+
+.user-info {
+  color: #6b7280;
+  font-size: 14px;
+}
+

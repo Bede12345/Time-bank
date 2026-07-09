@@ -101,3 +101,65 @@ a {
   font-size: 14px;
 }
 
+.hero {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 20px;
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-hero-primary {
+  background: white;
+  color: #2563eb;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-hero-primary:hover {
+  background: #f3f4f6;
+}
+
+.btn-hero-secondary {
+  border: 2px solid white;
+  color: white;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-hero-secondary:hover {
+  background: white;
+  color: #2563eb;
+}
+
+.hero-welcome {
+  font-size: 20px;
+}
+
+.hero-welcome span {
+  font-size: 16px;
+  opacity: 0.8;
+}
+

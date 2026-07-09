@@ -8,6 +8,8 @@ const Dashboard = () => {
   const [offers, setOffers] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [ratingForms, setRatingForms] = useState({});
+  const [ratedTransactions, setRatedTransactions] = useState(new Set());
 
   useEffect(() => {
     fetchData();
@@ -45,9 +47,6 @@ const Dashboard = () => {
     toast.error(error.response?.data?.error || 'Action failed');
   }
 };
-
-const [ratingForms, setRatingForms] = useState({});
-const [ratedTransactions, setRatedTransactions] = useState(new Set());
 
 const handleRatingChange = (txId, field, value) => {
   setRatingForms(prev => ({

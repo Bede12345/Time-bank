@@ -40,7 +40,7 @@ a {
 .navbar-brand {
   font-size: 24px;
   font-weight: 700;
-  color: #2563eb;
+  color: #2c6af0;
 }
 
 .navbar-links {
@@ -50,7 +50,7 @@ a {
 }
 
 .navbar-links a {
-  color: #4b5563;
+  color: #000000;
   transition: color 0.2s;
 }
 

@@ -1,18 +1,18 @@
 # Time-Bank / Skill-Swap Network
 
-A barter economy platform where users trade services using "time credits" — no money involved.
+A barter economy platform where users trade services using "time credits" — no money involved. Users can post offers or requests, accept trades, log hours, and rate each other after completion.
 
 ## Features
 - User registration and login with JWT authentication
 - Create and manage service offers/requests
-- Escrow-based transaction system
+- Escrow-based transaction system (credits held until both parties confirm)
 - Rating system for completed trades
-- User dashboard with credits and history
-- Notification system
+- User dashboard with credits, offers, and transaction history
+- Real-time notifications for trades and activities
 
 ## Tech Stack
 - **Backend**: Node.js, Express.js, PostgreSQL
-- **Frontend**: React, Vite, Tailwind CSS
+- **Frontend**: React, Vite, Custom CSS (no frameworks)
 - **Authentication**: JWT, bcrypt
 - **Logging**: Winston
 
@@ -22,23 +22,23 @@ A barter economy platform where users trade services using "time credits" — no
 - Node.js
 - PostgreSQL
 
-### Backend
+### Backend Setup
 ```bash
 cd backend
 npm install
 # Create .env file with database credentials
 cmd /c "npm run dev"
-Frontend
+Frontend Setup
 bash
 cd frontend
 npm install
-cmd /c "npm run dev"
-Database
+cmd /c "npm run dev -- --host"
+Database Setup
 bash
 psql -U postgres -c "CREATE DATABASE timebank;"
 psql -U postgres -d timebank -f database/schema.sql
 Environment Variables
-text
+env
 PORT=5000
 DB_HOST=localhost
 DB_PORT=5432
@@ -49,37 +49,58 @@ JWT_SECRET=your_secret_key
 JWT_EXPIRE=7d
 BCRYPT_ROUNDS=10
 API Endpoints
-POST /api/auth/register - Register user
+Method	Endpoint	Description
+POST	/api/auth/register	Register a new user
+POST	/api/auth/login	Login user
+GET	/api/auth/me	Get current user profile
+POST	/api/offers	Create a new offer/request
+GET	/api/offers	Get all offers
+GET	/api/offers/my	Get user's offers
+PATCH	/api/offers/:id/status	Update offer status
+POST	/api/transactions	Create a transaction
+GET	/api/transactions	Get user's transactions
+PATCH	/api/transactions/:id/confirm	Confirm transaction completion
+POST	/api/ratings	Create a rating
+GET	/api/notifications	Get user notifications
+Extra Features (Beyond Course Scope)
+Escrow-style dual-confirmation system — credits are held when a transaction is created and only transferred once both parties confirm completion
 
-POST /api/auth/login - Login user
+Custom error class hierarchy (AppError, ValidationError, AuthenticationError, etc.) with centralized error-handling middleware
 
-GET /api/auth/me - Get profile
+Input validation and sanitization middleware (express-validator)
 
-POST /api/offers - Create offer
-
-GET /api/offers - Get all offers
-
-GET /api/offers/my - Get user's offers
-
-POST /api/transactions - Create transaction
-
-GET /api/transactions - Get user's transactions
-
-PATCH /api/transactions/:id/confirm - Confirm completion
-
-POST /api/ratings - Create rating
-
-GET /api/notifications - Get notifications
-
-## Extra Features (Beyond Course Scope)
-- Escrow-style dual-confirmation transaction system — credits are held on the requester when a transaction is created, and only transferred to the provider once **both** parties independently confirm completion
-- Global PostgreSQL type parser for DECIMAL/NUMERIC columns, converting them to proper JS numbers (avoids the default string-return behavior of the `pg` driver)
-- Custom error class hierarchy (`AppError`, `ValidationError`, `AuthenticationError`, etc.) with centralized error-handling middleware
-- Input validation and sanitization middleware (express-validator)
+Custom CSS from scratch — no UI frameworks used (pure custom styling)
 
 Database Schema
 Tables: users, offers, transactions, ratings, notifications
+
 Schema file: database/schema.sql
 
----
-programmed and implemented by: - Bedemariyam Tamirat Ali
+Project Structure
+text
+time-bank/
+├── backend/
+│   ├── src/
+│   │   ├── config/         # Database configuration
+│   │   ├── models/         # Data models (User, Offer, Transaction, Rating, Notification)
+│   │   ├── controllers/    # Business logic
+│   │   ├── routes/         # API endpoints
+│   │   ├── middleware/     # Authentication, validation, logging
+│   │   ├── utils/          # Logger, error handlers
+│   │   └── app.js
+│   ├── .env
+│   └── server.js
+├── frontend/
+│   ├── src/
+│   │   ├── components/     # Reusable components (Navbar)
+│   │   ├── pages/          # Page components (Home, Login, Register, Dashboard, CreateOffer)
+│   │   ├── services/       # API client
+│   │   ├── context/        # Auth context
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css       # Custom CSS (no frameworks)
+│   └── package.json
+├── database/
+│   └── schema.sql          # PostgreSQL DDL
+└── README.md
+Programmed and implemented by: Bedemariyam Tamirat Ali

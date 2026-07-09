@@ -163,3 +163,133 @@ a {
   opacity: 0.8;
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.section-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.btn-create-offer {
+  background: #2563eb;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-create-offer:hover {
+  background: #1d4ed8;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.offer-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s;
+}
+
+.offer-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.offer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.offer-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.offer-type-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.offer-type-badge.offer {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.offer-type-badge.request {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.offer-description {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.offer-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.offer-status {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.offer-status.open {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.offer-status.closed {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.offer-link {
+  color: #2563eb;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.offer-link:hover {
+  color: #1d4ed8;
+}
+
+.loading {
+  text-align: center;
+  padding: 48px 0;
+  color: #6b7280;
+}
+
+.no-offers {
+  text-align: center;
+  padding: 48px 0;
+  color: #6b7280;
+}
+

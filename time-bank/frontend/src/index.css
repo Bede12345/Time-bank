@@ -392,3 +392,151 @@ a {
   cursor: not-allowed;
 }
 
+.dashboard {
+  padding: 40px 0;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 32px;
+}
+
+.stat-item .stat-label {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.stat-item .stat-value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.dashboard-section {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 24px;
+}
+
+.dashboard-section h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.dashboard-empty {
+  color: #6b7280;
+}
+
+.offer-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.offer-item:last-child {
+  border-bottom: none;
+}
+
+.offer-item .offer-info h3 {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.offer-item .offer-info p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.status-badge {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.status-badge.open {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.matched {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.completed {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.accepted {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.in_progress {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.status-badge.disputed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-badge.cancelled {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.status-badge.default {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.transaction-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-item .tx-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.transaction-item .tx-title {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.transaction-item .tx-users {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.transaction-item .tx-details {
+  font-size: 14px;
+  color: #6b7280;
+}
+
